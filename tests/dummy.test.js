@@ -112,3 +112,13 @@ describe("most likes", () => {
     assert.deepStrictEqual(result, {});
   });
 });
+
+describe("most blogs", () => {
+  test("has the author with the biggest number of blogs", () => {
+    const result = listHelper.mostBlogs(listWithMoreBlogs);
+    assert.deepStrictEqual(result, {
+      author: "Robert C. Martin",
+      blogs: 3,
+    });
+  });
+});
