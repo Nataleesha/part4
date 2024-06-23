@@ -19,8 +19,6 @@ const favoriteBlog = (blogs) => {
 
   const { title, author, likes } = mostLikes;
 
-  console.log("THE MOST LIKED BLOG: ", { title, author, likes });
-
   return { title, author, likes };
 };
 
@@ -34,9 +32,23 @@ const mostBlogs = (blogs) => {
   return authorsSorted[authorsSorted.length - 1];
 };
 
+const mostLikes = (blogs) => {
+  const sorted = _(blogs)
+    .groupBy("author")
+    .map((obj, key) => ({
+      author: key,
+      likes: _.sumBy(obj, "likes"),
+    }))
+    .sortBy("likes")
+    .value();
+
+  return sorted[sorted.length - 1];
+};
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
   mostBlogs,
+  mostLikes,
 };
